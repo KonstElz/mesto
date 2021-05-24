@@ -10,6 +10,6 @@
 
 ### Задача:
 
-* работа с pop-up
+* работа с pop-up   
 
 * [Ссылка на проект](https://konstelz.github.io/mesto/index.html)
