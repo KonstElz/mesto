@@ -5,11 +5,11 @@ let nameInput = document.querySelector('.popup__name');
 let jobInput = document.querySelector('.popup__job');
 
 function openForm() {
-  popup.classList.add('.popup_opened');
+  popup.classList.add('popup_opened');
 }
 
 function closeForm() {
-  popup.classList.remove('.popup_opened');
+  popup.classList.remove('popup_opened');
 }
 
 editButton.addEventListener('click', openForm);

@@ -1,13 +1,13 @@
 @font-face {
   font-family: 'Inter';
   src: url(./Inter-3.18/Inter-Regular.woff2);
-  font-weight: normal;
+  font-weight: 500;
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url(./Inter-3.18/Inter-Bold.woff2);
-  font-weight: bold;
+  src: url(./Inter-3.18/Inter-Medium.woff2);
+  font-weight: 400;
 }
 
 @font-face {
