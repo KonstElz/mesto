@@ -21,5 +21,7 @@
   .popup__button {
     padding-top: 14px;
     padding-bottom: 14px;
+    font-size: 14px;
+    line-height: 16.94px;
   }
 }
