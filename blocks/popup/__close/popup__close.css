@@ -26,3 +26,10 @@
     right: 0;
   }
 }
+
+@media (max-width: 480px) {
+  .popup__close {
+    width: 36.77px;
+    height: 36.77px;
+  }
+}
