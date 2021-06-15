@@ -39,6 +39,7 @@ const linkInput = document.getElementById('photo-link');
 const infoTitle = document.getElementById('photo-name');
 const infoLink = document.getElementById('photo-link');
 const formAddElement = document.querySelector('.popup__form-add');
+const template = document.querySelector('.elements__template');
 
 function openFormAdd() {
   titleInput.value = infoTitle.textContent;
@@ -53,14 +54,39 @@ function closeFormAdd() {
 function formAddSubmitHandler (evt) {
   evt.preventDefault();
 
-  let initialNewCards = initialCards.unshift(`
+    const name = titleInput.value;
+    const link = linkInput.value;
+    const element = template.content.cloneNode(true);
+    const title = element.querySelector('h2');
+    const img = element.querySelector('img');
+    const likeButton = element.querySelector('.element__like-button');
+    const removeButton = element.querySelector('.element__remove-button');
+
+    likeButton.addEventListener('click', addLike);
+    
+    title.textContent = name;
+    img.src = link;
+    img.alt = name;
+    document.querySelector('.elements').prepend(element);
+
+      function removePhoto() {      
+      removeButton.closest('.element').remove();
+    }
+
+    removeButton.addEventListener('click', removePhoto);
+
+    function addLike() {
+      likeButton.classList.toggle('element__like-button_active');
+    }
+
+  /*let initialNewCards = initialCards.unshift(
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  }`);
+  });*/
   
-  infoTitle.textContent = titleInput.value;
-  infoLink.textContent = linkInput.value;
+  /*infoTitle.textContent = titleInput.value;
+  infoLink.textContent = linkInput.value;*/
 
   closeFormAdd();
 }
@@ -99,7 +125,6 @@ const initialCards = [
 initialCards.forEach(function (item) {
     const name = item.name;
     const link = item.link;
-    const template = document.querySelector('.elements__template');
     const element = template.content.cloneNode(true);
     const title = element.querySelector('h2');
     const img = element.querySelector('img');
