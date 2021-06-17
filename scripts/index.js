@@ -79,15 +79,6 @@ function formAddSubmitHandler (evt) {
       likeButton.classList.toggle('element__like-button_active');
     }
 
-  /*let initialNewCards = initialCards.unshift(
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  });*/
-  
-  /*infoTitle.textContent = titleInput.value;
-  infoLink.textContent = linkInput.value;*/
-
   closeFormAdd();
 }
 
@@ -149,12 +140,24 @@ initialCards.forEach(function (item) {
     }
 });
 
-/*let popupFullscreenImg = document.querySelector('.popup-fullscreen');
-let fullscreenImg = document.querySelector('.popup-fullscreen__image');
-let fullscreenImgTitle = document.querySelector('.popup-fullscreen__figcaption');
-let fullscreenImgCloseBtn = document.querySelector('.popup-fullscreen__close-button');
-let card = document.querySelector('.popup-fullscreen__container');
+let popupImage = document.querySelector('.popup-image');
+let imagePreview = document.querySelector('.popup-image__preview');
+let imageTitle = document.querySelector('.popup-image__title');
+let imageCloseButton = document.querySelector('.popup-image__close');
+let titleImage = document.querySelector('h2');
+let imageSrc = document.querySelector('img');
 
-function popupFullscreenImgOpenClose () {
+function openImage() {
+  titleImage.value = title.textContent;
+  imageSrc.value = link;
+  popupImage.classList.add('popup_opened');
+  console.log(title.value);
+  console.log(image.value);
+}
 
-});*/
+function closeImage() {
+  popupImage.classList.remove('popup_opened');
+}
+
+image.addEventListener('click', openImage);
+imageCloseButton.addEventListener('click', closeImage);
