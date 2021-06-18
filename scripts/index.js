@@ -140,24 +140,30 @@ initialCards.forEach(function (item) {
     }
 });
 
+const element = template.content.cloneNode(true);
+let article = document.querySelector('.element');
 let popupImage = document.querySelector('.popup-image');
 let imagePreview = document.querySelector('.popup-image__preview');
 let imageTitle = document.querySelector('.popup-image__title');
 let imageCloseButton = document.querySelector('.popup-image__close');
-let titleImage = document.querySelector('h2');
-let imageSrc = document.querySelector('img');
+let image = document.querySelectorAll('.element__image');
 
-function openImage() {
-  titleImage.value = title.textContent;
-  imageSrc.value = link;
+function openImage(event) {
+  let imageSrc = event.target.closest('img').src;
+  let titleImage = event.target.closest('.element').querySelector('.element__title').textContent;
+  imagePreview.src = imageSrc;
+  imageTitle.textContent = titleImage; 
   popupImage.classList.add('popup_opened');
-  console.log(title.value);
-  console.log(image.value);
+  console.log(titleImage);
+  console.log(imageSrc);
 }
 
 function closeImage() {
   popupImage.classList.remove('popup_opened');
 }
 
-image.addEventListener('click', openImage);
+image.forEach(function(item){
+  item.addEventListener('click', openImage);
+}); 
+
 imageCloseButton.addEventListener('click', closeImage);
