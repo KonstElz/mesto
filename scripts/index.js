@@ -1,5 +1,5 @@
 const editButton = document.querySelector('.profile__info-edit-button');
-const popup = document.querySelector('.popup');
+const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const closeIcon = document.querySelector('.popup__close');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
@@ -11,11 +11,11 @@ const formElement = document.querySelector('.popup__form');
 function openForm() {
   nameInput.value = infoName.textContent;
   jobInput.value = infoJob.textContent;
-  popup.classList.add('popup_opened');
+  popupEditProfile.classList.add('popup_opened');
 }
 
 function closeForm() {
-  popup.classList.remove('popup_opened');
+  popupEditProfile.classList.remove('popup_opened');
 }
 
 function formSubmitHandler (evt) {
@@ -32,7 +32,7 @@ editButton.addEventListener('click', openForm);
 closeIcon.addEventListener('click', closeForm);
 
 const addButton = document.querySelector('.profile__add-button');
-const popupAdd = document.querySelector('.popup-add');
+const popupAdd = document.querySelector('.popup_type_add-card');
 const closeIconAddForm = document.querySelector('.popup__close-add-form');
 const titleInput = document.getElementById('photo-name');
 const linkInput = document.getElementById('photo-link');
@@ -50,6 +50,11 @@ function openFormAdd() {
 function closeFormAdd() {
   popupAdd.classList.remove('popup_opened');
 }
+
+function toggleLike() {
+  likeButton.classList.toggle('element__like-button_active');
+}
+
 
 function formAddSubmitHandler (evt) {
   evt.preventDefault();
@@ -69,11 +74,11 @@ function formAddSubmitHandler (evt) {
     img.alt = name;
     document.querySelector('.elements').prepend(element);
 
-      function removePhoto() {      
+      function deleteCard() {      
       removeButton.closest('.element').remove();
     }
 
-    removeButton.addEventListener('click', removePhoto);
+    removeButton.addEventListener('click', deleteCard);
 
     function addLike() {
       likeButton.classList.toggle('element__like-button_active');
@@ -85,85 +90,3 @@ function formAddSubmitHandler (evt) {
 formAddElement.addEventListener('submit', formAddSubmitHandler);
 addButton.addEventListener('click', openFormAdd);
 closeIconAddForm.addEventListener('click', closeFormAdd);
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-initialCards.forEach(function (item) {
-    const name = item.name;
-    const link = item.link;
-    const element = template.content.cloneNode(true);
-    const title = element.querySelector('h2');
-    const img = element.querySelector('img');
-    const likeButton = element.querySelector('.element__like-button');
-    const removeButton = element.querySelector('.element__remove-button');
-
-    likeButton.addEventListener('click', addLike);
-    
-    title.textContent = name;
-    img.src = link;
-    img.alt = name;
-    document.querySelector('.elements').append(element);
-
-      function removePhoto() {      
-      removeButton.closest('.element').remove();
-    }
-
-    removeButton.addEventListener('click', removePhoto);
-
-    function addLike() {
-      likeButton.classList.toggle('element__like-button_active');
-    }
-});
-
-const element = template.content.cloneNode(true);
-let article = document.querySelector('.element');
-let popupImage = document.querySelector('.popup-image');
-let imagePreview = document.querySelector('.popup-image__preview');
-let imageTitle = document.querySelector('.popup-image__title');
-let imageCloseButton = document.querySelector('.popup-image__close');
-let image = document.querySelectorAll('.element__image');
-
-function openImage(event) {
-  let imageSrc = event.target.closest('img').src;
-  let titleImage = event.target.closest('.element').querySelector('.element__title').textContent;
-  imagePreview.src = imageSrc;
-  imageTitle.textContent = titleImage; 
-  popupImage.classList.add('popup_opened');
-  console.log(titleImage);
-  console.log(imageSrc);
-}
-
-function closeImage() {
-  popupImage.classList.remove('popup_opened');
-}
-
-image.forEach(function(item){
-  item.addEventListener('click', openImage);
-}); 
-
-imageCloseButton.addEventListener('click', closeImage);
