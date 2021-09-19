@@ -1,11 +1,11 @@
 const editButton = document.querySelector('.profile__info-edit-button');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
-const closeIcon = document.querySelector('.popup__close');
+const closeProfileIcon = document.querySelector('.popup__close-profile-form');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
 const infoName = document.querySelector('.profile__info-name');
 const infoJob = document.querySelector('.profile__info-job');
-const formElement = document.querySelector('.popup__form');
+const formProfileElement = document.querySelector('.popup_type_profile-form');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -34,9 +34,9 @@ function submitProfileForm (evt) {
   closeForm();
 }
 
-formElement.addEventListener('submit', submitProfileForm);
+formProfileElement.addEventListener('submit', submitProfileForm);
 editButton.addEventListener('click', openForm);
-closeIcon.addEventListener('click', closeForm);
+closeProfileIcon.addEventListener('click', closeForm);
 
 const addButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_type_add-card');
@@ -48,6 +48,7 @@ const infoLink = document.getElementById('photo-link');
 const formAddElement = document.querySelector('.popup__form-add');
 const template = document.querySelector('.elements__template');
 const popupImage = document.querySelector('.popup-image');
+const getCards = document.querySelector('.elements');
 
 function openFormAdd() {
   titleInput.value = infoTitle.textContent;
@@ -110,7 +111,7 @@ function formAddSubmitHandler (evt) {
   const link = linkInput.value;
 
   const newCard = createCard(name, link);
-  document.querySelector('.elements').prepend(newCard);
+  getCards.prepend(newCard);
 
   closeFormAdd();
 };
@@ -124,7 +125,6 @@ function closeImage() {
 }
 
 const imageCloseButton = document.querySelector('.popup-image__close');
-
 imageCloseButton.addEventListener('click', closeImage);
 
 initialCards.forEach(function (item) { 
@@ -132,5 +132,5 @@ initialCards.forEach(function (item) {
   const link = item.link; 
     
   const initialCard = createCard(name, link);
-  document.querySelector('.elements').append(initialCard);
+  getCards.append(initialCard);
 });
