@@ -97,12 +97,17 @@ function createCard(name, link) {
     imagePreview.src = imageSrc;
     imageTitle.textContent = titleImage; 
     popupImage.classList.add('popup_opened');
+    document.addEventListener('keydown', handleEscClose);
   }
 
   img.addEventListener('click', openImage);
 
   return element;
 };
+
+function closeImage() {
+  popupImage.classList.remove('popup_opened');
+}
 
 function formAddSubmitHandler (evt) {
   evt.preventDefault();
@@ -120,10 +125,6 @@ formAddElement.addEventListener('submit', formAddSubmitHandler);
 addButton.addEventListener('click', openFormAdd);
 closeIconAddForm.addEventListener('click', closeFormAdd);
 
-function closeImage() {
-  popupImage.classList.remove('popup_opened');
-}
-
 const imageCloseButton = document.querySelector('.popup-image__close');
 imageCloseButton.addEventListener('click', closeImage);
 
@@ -133,4 +134,54 @@ initialCards.forEach(function (item) {
     
   const initialCard = createCard(name, link);
   getCards.append(initialCard);
+});
+
+// Закрытие попапа при нажатии на "Esc"
+
+const escKeyCode = 27;
+
+function handleEscClose(e) {
+  if (e.keyCode === escKeyCode) {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
+
+function openPopup(popupType) {
+  popupType.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscClose);
+}
+
+function closePopup(popupType) {
+  popupType.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscClose);
+}
+
+// Закрытие попапа при нажатии на оверлей
+
+function closePopupOverlayClick(popupType, event) {
+  if (event.target === event.currentTarget) {
+    closePopup(popupType);
+  }
+}
+
+popupAddCard.addEventListener('click', function () {
+  closePopupOverlayClick(popupAddCard, event);
+});
+
+popupEditProfile.addEventListener('click', function () {
+  closePopupOverlayClick(popupEditProfile, event);
+});
+
+popupImage.addEventListener('click', function () {
+  closePopupOverlayClick(popupImage, event);
+});
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
 });
