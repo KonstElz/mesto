@@ -6,14 +6,7 @@ const jobInput = document.querySelector('.popup__input_type_job');
 const infoName = document.querySelector('.profile__info-name');
 const infoJob = document.querySelector('.profile__info-job');
 const formProfileElement = document.querySelector('.popup__profile-edit-form');
-
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-} 
-
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-} 
+const submitButton = document.querySelector('.popup__button');
 
 function openForm() {
   nameInput.value = infoName.textContent;
@@ -30,6 +23,8 @@ function submitProfileForm (evt) {
 
   infoName.textContent = nameInput.value;
   infoJob.textContent = jobInput.value;
+
+  submitButton.classList.add('popup__button_disabled');
 
   closeForm();
 }
@@ -58,10 +53,6 @@ function openFormAdd() {
 
 function closeFormAdd() {
   closePopup(popupAddCard);
-}
-
-function toggleLike() {
-  likeButton.classList.toggle('element__like-button_active');
 }
 
 function createCard(name, link) {
@@ -95,9 +86,9 @@ function createCard(name, link) {
     const imageTitle = document.querySelector('.popup-image__title');
 
     imagePreview.src = imageSrc;
+    imagePreview.alt = titleImage;
     imageTitle.textContent = titleImage; 
-    popupImage.classList.add('popup_opened');
-    document.addEventListener('keydown', handleEscClose);
+    openPopup(popupImage);
   }
 
   img.addEventListener('click', openImage);
@@ -117,7 +108,10 @@ function formAddSubmitHandler (evt) {
 
   const newCard = createCard(name, link);
   getCards.prepend(newCard);
-
+  
+  const submitButton = document.querySelector('#add-card');
+  submitButton.classList.add('popup__button_disabled');
+  
   closeFormAdd();
 };
 
@@ -165,15 +159,15 @@ function closePopupOverlayClick(popupType, event) {
   }
 }
 
-popupAddCard.addEventListener('click', function () {
+popupAddCard.addEventListener('mousedown', function () {
   closePopupOverlayClick(popupAddCard, event);
 });
 
-popupEditProfile.addEventListener('click', function () {
+popupEditProfile.addEventListener('mousedown', function () {
   closePopupOverlayClick(popupEditProfile, event);
 });
 
-popupImage.addEventListener('click', function () {
+popupImage.addEventListener('mousedown', function () {
   closePopupOverlayClick(popupImage, event);
 });
 
