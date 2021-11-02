@@ -25,8 +25,9 @@ function submitProfileForm (evt) {
   infoJob.textContent = jobInput.value;
 
   submitButton.classList.add('popup__button_disabled');
+  document.getElementById('add-profile').disabled = true;
 
-  closeForm();
+  closePopup(popupEditProfile);
 }
 
 formProfileElement.addEventListener('submit', submitProfileForm);
@@ -88,6 +89,7 @@ function createCard(name, link) {
     imagePreview.src = imageSrc;
     imagePreview.alt = titleImage;
     imageTitle.textContent = titleImage; 
+    
     openPopup(popupImage);
   }
 
@@ -111,6 +113,7 @@ function formAddSubmitHandler (evt) {
   
   const submitButton = document.querySelector('#add-card');
   submitButton.classList.add('popup__button_disabled');
+  document.getElementById('add-card').disabled = true; 
   
   closeFormAdd();
 };
@@ -120,7 +123,7 @@ addButton.addEventListener('click', openFormAdd);
 closeIconAddForm.addEventListener('click', closeFormAdd);
 
 const imageCloseButton = document.querySelector('.popup-image__close');
-imageCloseButton.addEventListener('click', closeImage);
+imageCloseButton.addEventListener('click', () => { closePopup(popupImage) });
 
 initialCards.forEach(function (item) { 
   const name = item.name; 
